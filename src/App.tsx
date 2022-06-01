@@ -24,7 +24,7 @@ export function App() {
       <C.Body>
         
 
-        <TableArea />
+        <TableArea list={filteredList} />
       </C.Body>
     </C.Container>
   );
