@@ -1,14 +1,20 @@
 import * as C from './App.styles'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Item } from './types/Item'
 import { Category } from './types/Category'
 import { categories } from './data/categories';
 import { items } from './data/items';
-import { getCurrentMonth } from './helpers/dateFilter';
+import { filterListByMonth, getCurrentMonth } from './helpers/dateFilter';
+import { TableArea } from './components/TableArea';
 
 export function App() {
   const [list, setList] = useState(items)
+  const [filteredList, setFilteredList] = useState<Item[]>([])
   const [currentMonth, setCurrentMonth] = useState(getCurrentMonth())
+
+  useEffect(() => {
+    setFilteredList( filterListByMonth(list, currentMonth) )
+  }, [list, currentMonth])
 
   return (
     <C.Container>
@@ -17,6 +23,8 @@ export function App() {
       </C.Header>
       <C.Body>
         
+
+        <TableArea />
       </C.Body>
     </C.Container>
   );
