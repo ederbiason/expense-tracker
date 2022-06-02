@@ -1,12 +1,16 @@
 import { formatCurrentMonth } from '../../helpers/dateFilter';
+import { ResumeItem } from '../ResumeItem';
 import * as C from './styles'
 
 type Props = {
     currentMonth: string;
     onMonthChange: (newMonth: string) => void;
+    income: number;
+    expense: number;
 }
 
-export function InfoArea({currentMonth, onMonthChange}: Props) {
+export function InfoArea({currentMonth, onMonthChange, income, expense}: Props) {
+    
     function handlePrevMonth() {
         let [year, month] = currentMonth.split('-');
         let currentDate = new Date(parseInt(year), parseInt(month) - 1, 1)
@@ -30,7 +34,13 @@ export function InfoArea({currentMonth, onMonthChange}: Props) {
             </C.MonthArea>
 
             <C.ResumeArea>
-
+                <ResumeItem title="Income" value={income} />
+                <ResumeItem title="Expense" value={expense} />
+                <ResumeItem 
+                    title="Balance" 
+                    value={income - expense}
+                    color={(income-expense) < 0 ? 'red' : 'green'}
+                />
             </C.ResumeArea>
         </C.Container>
     )
