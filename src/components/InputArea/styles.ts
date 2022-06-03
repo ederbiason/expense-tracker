@@ -20,7 +20,7 @@ export const InputTitle = styled.div`
     margin-bottom: 5px;
 `
 
-const baseInputAndSelectStyles = css`
+const baseStyles = css`
     width: 100%;
     height: 30px;
     padding: 0 5px;
@@ -29,15 +29,15 @@ const baseInputAndSelectStyles = css`
 `
 
 export const Input = styled.input`
-    ${baseInputAndSelectStyles}
+    ${baseStyles}
 `
 
 export const Select = styled.select`
-    ${baseInputAndSelectStyles}
+    ${baseStyles}
 `
 
 export const Button = styled.button`
-    ${baseInputAndSelectStyles}
+    ${baseStyles}
     background-color: lightblue;
     color: black;
     font-weight: bold;

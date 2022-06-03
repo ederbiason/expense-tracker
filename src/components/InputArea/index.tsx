@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { categories } from '../../data/categories'
 import { Item } from '../../types/Item'
 import * as C from './styles'
 
@@ -6,6 +8,12 @@ type Props = {
 }
 
 export function InputArea({ onAdd }: Props) {
+    const [dateField, setDateField] = useState('');
+    const [categoryField, setCategoryField] = useState('');
+    const [titleField, setTitleField] = useState('');
+    const [valueField, setValueField] = useState(0);
+
+    let categoryKeys: string[] = Object.keys(categories);
 
     function handleAddEvent() {
         let newItem: Item = {
@@ -28,7 +36,7 @@ export function InputArea({ onAdd }: Props) {
             <C.InputLabel>
                 <C.InputTitle>Category</C.InputTitle>
                 <C.Select>
-                    
+
                 </C.Select>
             </C.InputLabel>
                 
