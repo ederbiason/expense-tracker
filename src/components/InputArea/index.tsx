@@ -1,7 +1,9 @@
-import { useState } from 'react'
-import { categories } from '../../data/categories'
-import { Item } from '../../types/Item'
 import * as C from './styles'
+import { useState } from 'react'
+import { Item } from '../../types/Item'
+
+import { categories } from '../../data/categories'
+import { newDateAdjusted } from '../../helpers/dateFilter'
 
 type Props = {
     onAdd: (item: Item) => void
@@ -16,21 +18,46 @@ export function InputArea({ onAdd }: Props) {
     let categoryKeys: string[] = Object.keys(categories);
 
     function handleAddEvent() {
-        let newItem: Item = {
-            date: new Date(2022, 6, 3),
-            category: 'food',
-            title: 'Item de teste',
-            value: 250.25
+        let errors: string[] = [];
+
+        if (isNaN(new Date(dateField).getTime())) {
+            errors.push('Invalid date!')
+        }
+        if (!categoryKeys.includes(categoryField)) {
+            errors.push('Invalid category!')
+        }
+        if (titleField === '') {
+            errors.push('Empty title!')
+        }
+        if (valueField <= 0) {
+            errors.push('Invalid value!')
         }
 
-        onAdd(newItem)
+        if (errors.length > 0) {
+            alert(errors.join('\n'));
+        } else {
+            onAdd({
+                date: newDateAdjusted(dateField),
+                category: categoryField,
+                title: titleField,
+                value: valueField
+            })
+            clearFields();
+        }
+    }
+
+    const clearFields = () => {
+        setDateField('');
+        setCategoryField('');
+        setTitleField('');
+        setValueField(0);
     }
 
     return (
         <C.Container>
             <C.InputLabel>
                 <C.InputTitle>Date</C.InputTitle>
-                <C.Input type="date" />
+                <C.Input type="date" value={dateField} onChange={e => setDateField(e.target.value)} />
             </C.InputLabel>
 
             <C.InputLabel>
