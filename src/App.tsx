@@ -1,7 +1,6 @@
 import * as C from './App.styles'
 import { useEffect, useState } from 'react';
-import { Item } from './types/Item'
-import { Category } from './types/Category'
+import { Item } from './types/Item';
 import { categories } from './data/categories';
 import { items } from './data/items';
 import { filterListByMonth, getCurrentMonth } from './helpers/dateFilter';

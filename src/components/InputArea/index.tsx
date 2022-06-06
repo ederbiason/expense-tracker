@@ -62,19 +62,24 @@ export function InputArea({ onAdd }: Props) {
 
             <C.InputLabel>
                 <C.InputTitle>Category</C.InputTitle>
-                <C.Select>
-
+                <C.Select value={categoryField} onChange={e => setCategoryField(e.target.value)}>
+                    <>
+                        <option></option>
+                        {categoryKeys.map((key, index) => (
+                            <option key={index} value={key}>{categories[key].title}</option>
+                        ))}
+                    </>
                 </C.Select>
             </C.InputLabel>
                 
             <C.InputLabel>
                 <C.InputTitle>Title</C.InputTitle>
-                <C.Input type="text" />
+                <C.Input type="text" value={titleField} onChange={e => setTitleField(e.target.value)} />
             </C.InputLabel>
 
             <C.InputLabel>
                 <C.InputTitle>Value</C.InputTitle>
-                <C.Input type="number" />
+                <C.Input type="number" value={valueField} onChange={e => setValueField(parseFloat(e.target.value))} />
             </C.InputLabel>
 
             <C.InputLabel>
